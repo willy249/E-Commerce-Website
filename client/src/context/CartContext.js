@@ -7,7 +7,6 @@ const CartProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState([]);
   const [itemsAmount, setItemsAmount] = useState(0);
-  const [amount, setAmount] = useState(0);
   const [total, setTotal] = useState(0);
 
   // 計算_總數量
@@ -39,7 +38,6 @@ const CartProvider = ({ children }) => {
     if (cartItem) {
       const newCart = cart.map((item) => {
         if (item.id === itemID) {
-          setAmount(cartItem.amount + 1);
           return { ...item, amount: cartItem.amount + 1 };
         } else {
           return item;
@@ -78,10 +76,8 @@ const CartProvider = ({ children }) => {
       const newCart = [...cart].map((item) => {
         if (item.id === id) {
           if (isNaN(value)) {
-            setAmount(1);
             return { ...item, amount: 1 }; // 若輸入值非數字，默認數量為 1
           } else {
-            setAmount(value);
             return { ...item, amount: value };
           }
         } else {
@@ -103,7 +99,6 @@ const CartProvider = ({ children }) => {
     if (carItem) {
       const newCart = [...cart].map((item) => {
         if (item.id === id) {
-          setAmount(value);
           return { ...item, amount: value };
         } else {
           return item;
